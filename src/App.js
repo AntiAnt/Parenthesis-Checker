@@ -62,6 +62,7 @@ class App extends Component {
           onChange={(event)=>this.update(event)}
         />
         {this.renderString()}
+        THanks Brett!
       </div>
     );
   };
