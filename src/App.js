@@ -8,6 +8,7 @@ class App extends Component {
     this.state = {
       string: '',
       para: '',
+      index: null
       
     }
   }
@@ -22,22 +23,31 @@ class App extends Component {
         if (char === ')') {
           count--;
         }
-        
-        if (count < 0) {
-          return (<mark>{text[index]}</mark>)
-        }
-      }
+      }  
+      if (count < 0) {
+        console.log(index);
+        return index;
+      } 
     }
       
     if (count === 0) {
-      return true;
+      return null;
     }
-
   };
   
   update(event) {
     this.setState({string: event.target.value});
-    this.checker(this.state.string);
+    var x = this.checker(this.state.string);
+    this.setState({index: x});
+  }
+  renderString(){
+   
+    if (this.state.index === null){
+      return <p>{this.state.string}</p>;
+    }
+    let leftSide = this.state.string.slice(0, this.state.index);
+    let rightSide = this.state.string.slice(this.state.index+1);
+    return <p>{leftSide}<mark>{this.state.string[this.state.index]}</mark>{rightSide}</p>;
   }
   
   render() {
@@ -49,7 +59,7 @@ class App extends Component {
           value={this.state.string}
           onChange={(event)=>this.update(event)}
         />
-        <p>{this.state.string}</p>
+        {this.renderString()}
       </div>
     );
   };
