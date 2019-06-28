@@ -25,13 +25,15 @@ class App extends Component {
         }
       }  
       if (count < 0) {
-        console.log(index);
         return index;
       } 
     }
       
     if (count === 0) {
       return null;
+    }
+    if (count > 0) {
+      return text.length - 1;
     }
   };
   
